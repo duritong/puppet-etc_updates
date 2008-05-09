@@ -1,0 +1,54 @@
+#!/bin/sh
+
+if [ -e "/etc/localtime.rpmnew" ]; then
+	echo -e "deleting /etc/localtime.rpmnew\n"
+	rm -f /etc/localtime.rpmnew
+fi
+
+
+HEADER="1"
+for file in `locate *.rpmnew  | grep -v /var/lib/ucm/current | grep -v /ldaphome/ | grep -v sendmail.cf | grep -v /backup/ | grep -v /data/`; do
+	if [ -e $file ]; then
+	        if [[ "$HEADER" == "1" ]]; then
+        	        echo -e "################################# rpmnew ##############################\n"
+                	HEADER="0"
+	        fi
+
+		OUTPUT="`diff -Naur ${file/.rpmnew/} ${file}`"
+		MATCHES=$?
+		if [[ "${MATCHES}" == "0" ]]; then
+			echo -e "File ${file/.rpmnew/} has no updates.. deleting!\n"
+			rm -f ${file}
+		else
+			echo "File ${file/.rpmnew/} has the following changes:"
+			echo "$OUTPUT" 
+			echo -e "\n"
+	        fi		
+	fi	
+done
+
+
+HEADER="1"
+for file in `locate *.rpmsave  | grep -v /var/lib/ucm/current | grep -v /ldaphome/ | grep -v sendmail.cf | grep -v /backup/ | grep -v /data/`; do
+	if [ -e $file ]; then
+		if [[ "${HEADER}" == "1" ]]; then
+			echo -e "################################# rpmsave ##############################\n"
+			HEADER=0
+		fi
+		if [ ! -e ${file/.rpmsave/} ]; then
+			echo -e "${file/.rpmsave/} doesn't exist anmyore... So deleting ${file}"
+			rm -f ${file}
+			break
+		fi
+        	OUTPUT="`diff -Naur ${file} ${file/.rpmsave/}`"
+	        MATCHES=$?
+        	if [[ "${MATCHES}" == "0" ]]; then
+                	echo -e "File ${file/.rpmsave/} had no updates.. deleting!\n"
+	                rm -f ${file}
+        	else
+                	echo "File ${file/.rpmsave/} had the following changes:"
+	                echo "$OUTPUT"
+        	        echo -e "\n"
+	        fi
+	fi
+done
