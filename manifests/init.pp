@@ -1,13 +1,21 @@
-#######################################
-# etc-updates module
-# Puzzle ITC - haerry+puppet(at)puzzle.ch
-# GPLv3
 #
-# this moudel deploys 2 tools
+# etc-updates module
+#
+# Copyright 2008, Puzzle ITC GmbH
+# Marcel Härry haerry+puppet(at)puzzle.ch
+# Simon Josi josi+puppet(at)puzzle.ch
+#
+# This program is free software; you can redistribute 
+# it and/or modify it under the terms of the GNU 
+# General Public License version 3 as published by 
+# the Free Software Foundation.
+#
+# This module deploys 2 tools
+#
 # - etc-update
 # - etc-downgrade
 #
-# they both look for config files in /etc
+# They both look for config files in /etc
 # which are named .rpmnew or .rpmsave
 # and provide a way to merge them.
 # as well it deploys some cronscripts 
@@ -18,10 +26,10 @@
 # way, like gentoo does.
 # it is only tested on centos and fedora
 # systems.
-#######################################
-
+#
 
 # modules_dir { "etc-updates": }
+
 class etc-updates {
 
     # cron
