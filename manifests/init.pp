@@ -32,9 +32,12 @@
 
 class etc-updates {
 
+    include mlocate
+
     # cron
     file{"/etc/cron.weekly/etc-updates.cron":
         source => "puppet://$server/etc-updates/etc-updates.cron",
+        require => Package[mlocate],
         mode => 0755, owner => root, group => 0;
     }
 
