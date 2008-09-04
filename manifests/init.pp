@@ -35,26 +35,26 @@ class etc-updates {
     include mlocate
 
     # cron
-    file{"/etc/cron.weekly/etc-updates.cron":
+    file{'/etc/cron.weekly/etc-updates.cron':
         source => "puppet://$server/etc-updates/etc-updates.cron",
         require => Package[mlocate],
         mode => 0755, owner => root, group => 0;
     }
 
     # config
-    file{"/etc/sysconfig/etc-update.conf":
+    file{'/etc/sysconfig/etc-update.conf':
         source => "puppet://$server/etc-updates/etc-update.conf",
         mode => 0644, owner => root, group => 0;
     }
 
     # etc-update
-    file{"/usr/local/sbin/etc-update":
+    file{'/usr/local/sbin/etc-update':
         source => "puppet://$server/etc-updates/etc-update",
         mode => 0700, owner => root, group => 0;
     }
 
     # etc-downgrade
-    file{"/usr/local/sbin/etc-downgrade":
+    file{'/usr/local/sbin/etc-downgrade':
         source => "puppet://$server/etc-updates/etc-downgrade",
         mode => 0700, owner => root, group => 0;
     }

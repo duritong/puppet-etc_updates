@@ -440,8 +440,8 @@ scriptname=$(basename $0)
 
 trap die term
 
-export CONFIG_PROTECT='/etc'
-export CONFIG_PROTECT_MASK='/etc/env.d /etc/gconf /etc/revdep-rebuild /etc/terminfo /etc/udev/rules.d'
+export CONFIG_PROTECT='/etc /var /usr'
+export CONFIG_PROTECT_MASK='/etc/env.d /etc/gconf /etc/revdep-rebuild /etc/terminfo /etc/udev/rules.d /var/log /var/www'
 export ROOT='/'
 export USERLAND='GNU'
 export PORTAGE_TMPDIR=/var/tmp/
