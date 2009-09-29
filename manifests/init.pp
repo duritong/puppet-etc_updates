@@ -28,11 +28,9 @@
 # systems.
 #
 
-# modules_dir { "etc-updates": }
-
 class etc-updates {
 
-    include mlocate
+    include ::mlocate
 
     # cron
     file{'/etc/cron.weekly/etc-updates.cron':
