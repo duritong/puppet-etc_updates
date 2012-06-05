@@ -1,5 +1,5 @@
 #
-# etc-updates module
+# etc_updates module
 #
 # Copyright 2008, Puzzle ITC GmbH
 # Marcel Härry haerry+puppet(at)puzzle.ch
@@ -28,32 +28,32 @@
 # systems.
 #
 
-class etc-updates {
+class etc_updates {
 
-    include ::mlocate
+  include ::mlocate
 
-    # cron
-    file{'/etc/cron.weekly/etc-updates.cron':
-        source => "puppet:///modules/etc-updates/etc-updates.cron",
-        require => Package[mlocate],
-        mode => 0755, owner => root, group => 0;
-    }
+  # cron
+  file{'/etc/cron.weekly/etc-updates.cron':
+    source => "puppet:///modules/etc_updates/etc-updates.cron",
+    require => Package[mlocate],
+    mode => 0755, owner => root, group => 0;
+  }
 
-    # config
-    file{'/etc/sysconfig/etc-update.conf':
-        source => "puppet:///modules/etc-updates/etc-update.conf",
-        mode => 0644, owner => root, group => 0;
-    }
+  # config
+  file{'/etc/sysconfig/etc-update.conf':
+    source => "puppet:///modules/etc_updates/etc-update.conf",
+    mode => 0644, owner => root, group => 0;
+  }
 
-    # etc-update
-    file{'/usr/local/sbin/etc-update':
-        source => "puppet:///modules/etc-updates/etc-update",
-        mode => 0700, owner => root, group => 0;
-    }
+  # etc-update
+  file{'/usr/local/sbin/etc-update':
+    source => "puppet:///modules/etc_updates/etc-update",
+    mode => 0700, owner => root, group => 0;
+  }
 
-    # etc-downgrade
-    file{'/usr/local/sbin/etc-downgrade':
-        source => "puppet:///modules/etc-updates/etc-downgrade",
-        mode => 0700, owner => root, group => 0;
-    }
+  # etc-downgrade
+  file{'/usr/local/sbin/etc-downgrade':
+    source => "puppet:///modules/etc_updates/etc-downgrade",
+    mode => 0700, owner => root, group => 0;
+  }
 }
