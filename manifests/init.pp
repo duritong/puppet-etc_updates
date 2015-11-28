@@ -27,33 +27,35 @@
 # it is only tested on centos and fedora
 # systems.
 #
-
 class etc_updates {
 
   include ::mlocate
 
-  # cron
-  file{'/etc/cron.weekly/etc-updates.cron':
-    source => "puppet:///modules/etc_updates/etc-updates.cron",
-    require => Package[mlocate],
-    mode => 0755, owner => root, group => 0;
-  }
-
-  # config
-  file{'/etc/sysconfig/etc-update.conf':
-    source => "puppet:///modules/etc_updates/etc-update.conf",
-    mode => 0644, owner => root, group => 0;
-  }
-
-  # etc-update
-  file{'/usr/local/sbin/etc-update':
-    source => "puppet:///modules/etc_updates/etc-update",
-    mode => 0700, owner => root, group => 0;
-  }
-
-  # etc-downgrade
-  file{'/usr/local/sbin/etc-downgrade':
-    source => "puppet:///modules/etc_updates/etc-downgrade",
-    mode => 0700, owner => root, group => 0;
+  file{
+    # cron
+    '/etc/cron.weekly/etc-updates.cron':
+      source  => 'puppet:///modules/etc_updates/etc-updates.cron',
+      require => Package[mlocate],
+      owner   => root,
+      group   => 0,
+      mode    => '0755';
+    # config
+    '/etc/sysconfig/etc-update.conf':
+      source => 'puppet:///modules/etc_updates/etc-update.conf',
+      owner  => root,
+      group  => 0,
+      mode   => '0644';
+    # etc-update
+    '/usr/local/sbin/etc-update':
+      source => 'puppet:///modules/etc_updates/etc-update',
+      owner  => root,
+      group  => 0,
+      mode   => '0700';
+    # etc-downgrade
+    '/usr/local/sbin/etc-downgrade':
+      source => 'puppet:///modules/etc_updates/etc-downgrade',
+      owner  => root,
+      group => 0,
+      mode   => '0700';
   }
 }
