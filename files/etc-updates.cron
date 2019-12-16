@@ -7,7 +7,7 @@ fi
 
 
 HEADER="1"
-for file in `locate *.rpmnew  | grep -Ev '^/(var/lib/(containers|docker)|ldaphome/|backup/|data/)' | grep -v sendmail.cf`; do
+for file in `locate *.rpmnew  | grep -Ev '^/(var/lib/(containers|docker|gitlab-runner)|ldaphome/|backup/|data/)' | grep -v sendmail.cf`; do
 	if [ -e $file ]; then
 	        if [[ "$HEADER" == "1" ]]; then
         	        echo -e "################################# rpmnew ##############################\n"
@@ -29,7 +29,7 @@ done
 
 
 HEADER="1"
-for file in `locate *.rpmsave  | grep -Ev '^/(var/lib/(containers|docker)|ldaphome/|backup/|data/)' | grep -v sendmail.cf`; do
+for file in `locate *.rpmsave  | grep -Ev '^/(var/lib/(containers|docker|gitlab-runner)|ldaphome/|backup/|data/)' | grep -v sendmail.cf`; do
 	if [ -e $file ]; then
 		if [[ "${HEADER}" == "1" ]]; then
 			echo -e "################################# rpmsave ##############################\n"
